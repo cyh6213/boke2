@@ -1,25 +1,25 @@
 ---
 title: "关于我"
-date: 2026-04-29T10:00:00+08:00
+date: 2026-05-12T10:00:00+08:00
 draft: false
 ---
 
 # 关于我
 
-大家好，我是 XieJava，一名热爱技术的程序员。
+大家好，我是程愚瀚，一名热爱技术的开发者。
 
 ## 个人简介
 
-- **姓名**：XieJava
+- **姓名**：程愚瀚
 - **职业**：软件工程师
-- **邮箱**：xiejava@ishareread.com
+- **邮箱**：295248
 - **GitHub**：[https://github.com/xiejava](https://github.com/xiejava)
 
 ## 技术栈
 
 - **编程语言**：Java、Python、Go、JavaScript/TypeScript
 - **前端技术**：Vue.js、React、HTML/CSS
-- **后端技术**：Spring Boot、Node.js、Docker、Kubernetes
+- **后端技术**：Spring Boot、Node.js、Docker
 - **数据库**：MySQL、PostgreSQL、MongoDB、Redis
 
 ## 博客初衷
@@ -32,7 +32,6 @@ draft: false
 
 ## 联系我
 
-如果你有任何问题或建议，欢迎通过以下方式联系我：
+如果你有任何问题或建议，欢迎通过 GitHub 联系我：
 
-- 📧 邮箱：xiejava@ishareread.com
-- 💬 GitHub：[xiejava](https://github.com/xiejava)
+- 💬 GitHub：[cyh6213](https://github.com/cyh6213)
