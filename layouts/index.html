@@ -4,98 +4,106 @@
 {{- partial "index_profile.html" . }}
 {{- else }} {{/* if not profileMode */}}
 
-{{- if site.Params.homeInfoParams }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{- /* 最近文章 */ -}}
-<section class="recent-posts">
-  <header class="section-header">
-    <h2>📝 最近文章</h2>
-  </header>
-  {{- $posts := where site.RegularPages "Type" "posts" }}
-  {{- $posts = where $posts "Params.hiddenInHomeList" "!=" "true" }}
-  {{- $posts = $posts | first 1 }}
-  <div class="post-list">
-    {{- range $posts }}
-    <article class="post-entry">
-      {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-      {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-      <header class="entry-header">
-        <h2 class="entry-hint-parent">
-          {{- .Title }}
-          {{- if .Draft }}
-          <span class="entry-hint" title="Draft">
-            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-              <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-            </svg>
-          </span>
-          {{- end }}
-        </h2>
-      </header>
-      {{- if (ne (.Param "hideSummary") true) }}
-      <div class="entry-content">
-        <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+{{- /* Hero Section - 欢迎区域 */ -}}
+<section class="hero-section">
+  <div class="hero-bg-text">
+    <span class="bg-skill" style="top: 15%; left: 10%; font-size: 36px;">Java</span>
+    <span class="bg-skill" style="top: 25%; left: 65%; font-size: 24px;">MySQL</span>
+    <span class="bg-skill" style="top: 40%; left: 25%; font-size: 28px;">Redis</span>
+    <span class="bg-skill" style="top: 10%; left: 50%; font-size: 22px;">Caffeine</span>
+    <span class="bg-skill" style="top: 20%; left: 85%; font-size: 20px;">Spring</span>
+    <span class="bg-skill" style="top: 35%; left: 80%; font-size: 26px;">RocketMQ</span>
+    <span class="bg-skill" style="top: 70%; left: 55%; font-size: 24px;">Docker</span>
+    <span class="bg-skill" style="top: 60%; left: 15%; font-size: 32px;">Spec Coding</span>
+    <span class="bg-skill" style="top: 55%; left: 70%; font-size: 30px;">RAG</span>
+    <span class="bg-skill" style="top: 80%; left: 20%; font-size: 26px;">Work Flow</span>
+    <span class="bg-skill" style="top: 45%; left: 40%; font-size: 22px;">ReAct</span>
+    <span class="bg-skill" style="top: 75%; left: 85%; font-size: 28px;">Skill</span>
+  </div>
+  <div class="hero-main">
+    <div class="hero-content">
+      <h1>👋 你好，我是程愚瀚</h1>
+      <p class="hero-subtitle">后端开发 | 大模型应用</p>
+      <p class="hero-highlight">🎓 电子科技大学 28届</p>
+      <div class="hero-buttons">
+        <a href="/about/" class="btn btn-secondary">关于我</a>
       </div>
-      {{- end }}
-      {{- if not (.Param "hideMeta") }}
-      <footer class="entry-footer">
-        {{- partial "post_meta.html" . -}}
-      </footer>
-      {{- end }}
-      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-    </article>
-    {{- end }}
-    {{- if gt (len $posts) 0 }}
-    <div class="view-more">
-      <a href="/posts/" class="btn">查看更多文章 →</a>
     </div>
-    {{- end }}
+    <div class="hero-status">
+      <div class="status-header">状态</div>
+      <div class="status-content">
+        <p>📮 日常实习投递</p>
+        <p>📚 学习 K8S</p>
+        <p>🚀 RAG 项目改进</p>
+      </div>
+    </div>
   </div>
 </section>
 
-{{- /* 最近项目 */ -}}
-<section class="recent-projects" style="margin-top: 40px;">
+{{- /* Featured Projects - 精选项目 */ -}}
+<section class="featured-projects">
   <header class="section-header">
-    <h2>🚀 最近项目</h2>
+    <h2>🏆 精选项目</h2>
   </header>
-  {{- $projects := where site.RegularPages "Type" "projects" }}
-  {{- $projects = $projects | first 1 }}
-  <div class="post-list">
-    {{- range $projects }}
-    <article class="post-entry">
-      {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  <div class="projects-grid featured-grid">
+    {{- $featured := slice "rag" "workflow" "kaifazhe" }}
+    {{- range $name := $featured }}
+    {{- with site.GetPage (printf "projects/%s" $name) }}
+    <article class="project-card">
+      {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default true }}
       {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-      <header class="entry-header">
-        <h2 class="entry-hint-parent">
-          {{- .Title }}
-          {{- if .Draft }}
-          <span class="entry-hint" title="Draft">
-            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-              <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-            </svg>
-          </span>
+      <div class="project-content">
+        <div class="project-tags">
+          {{- range first 3 .Params.tags }}
+          <span class="tag">{{ . }}</span>
           {{- end }}
-        </h2>
-      </header>
-      {{- if (ne (.Param "hideSummary") true) }}
-      <div class="entry-content">
-        <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+        </div>
+        <header class="project-header">
+          <h3>{{ .Title }}</h3>
+        </header>
+        <div class="project-summary">
+          <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+        </div>
+        <footer class="project-footer">
+          <span class="project-date">{{ .Date.Format "2006-01-02" }}</span>
+        </footer>
       </div>
-      {{- end }}
-      {{- if not (.Param "hideMeta") }}
-      <footer class="entry-footer">
-        {{- partial "post_meta.html" . -}}
-      </footer>
-      {{- end }}
-      <a class="entry-link" aria-label="project link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+      <a class="project-link" aria-label="project link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
     </article>
     {{- end }}
-    {{- if gt (len $projects) 0 }}
-    <div class="view-more">
-      <a href="/projects/" class="btn">查看更多项目 →</a>
-    </div>
     {{- end }}
+  </div>
+  <div class="view-more">
+    <a href="/projects/" class="btn">查看全部项目 →</a>
+  </div>
+</section>
+
+{{- /* Recent Posts - 最近文章 */ -}}
+<section class="recent-posts">
+  <header class="section-header">
+    <h2>📝 最近文章</h2>
+    <p class="section-subtitle">技术分享与思考</p>
+  </header>
+  {{- $posts := where site.RegularPages "Type" "posts" }}
+  {{- $posts = where $posts "Params.hiddenInHomeList" "!=" "true" }}
+  {{- $posts = $posts | first 3 }}
+  <div class="posts-list">
+    {{- range $posts }}
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+        {{- if .Params.categories }}
+        <span class="post-category">{{ index .Params.categories 0 }}</span>
+        {{- end }}
+      </div>
+      <h3 class="post-title">{{ .Title }}</h3>
+      <p class="post-summary">{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      <a class="post-link" href="{{ .Permalink }}"></a>
+    </article>
+    {{- end }}
+  </div>
+  <div class="view-more">
+    <a href="/posts/" class="btn">查看更多文章 →</a>
   </div>
 </section>
 
